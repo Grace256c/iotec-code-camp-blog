@@ -1,7 +1,5 @@
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -10,17 +8,7 @@ import {
   type ReactNode,
 } from 'react'
 import { PATHS, type AppPath } from './paths'
-
-interface NavigateOptions {
-  replace?: boolean
-}
-
-interface RouterContextValue {
-  pathname: string
-  navigate: (to: AppPath, options?: NavigateOptions) => void
-}
-
-const RouterContext = createContext<RouterContextValue | null>(null)
+import { RouterContext, useLocation, useNavigate, type NavigateOptions } from './router-context'
 
 function normalizePath(rawPath: string): string {
   if (!rawPath || rawPath === '/') return PATHS.LANDING
@@ -57,22 +45,6 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   const value = useMemo(() => ({ pathname, navigate }), [pathname, navigate])
 
   return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>
-}
-
-export function useLocation() {
-  const context = useContext(RouterContext)
-  if (!context) {
-    throw new Error('useLocation must be used within a RouterProvider')
-  }
-  return { pathname: context.pathname }
-}
-
-export function useNavigate() {
-  const context = useContext(RouterContext)
-  if (!context) {
-    throw new Error('useNavigate must be used within a RouterProvider')
-  }
-  return context.navigate
 }
 
 export interface LinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> {

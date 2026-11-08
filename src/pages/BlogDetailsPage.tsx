@@ -1,6 +1,6 @@
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useNavigate } from '../navigation/RouterContext'
+import { useNavigate } from '../navigation/router-context'
 import { PATHS } from '../navigation/paths'
 
 export function BlogDetailsPage() {
