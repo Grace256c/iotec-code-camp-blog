@@ -41,7 +41,8 @@ iotec-code-camp-blog/
 │   │   └── utils.ts               # Class-name merging utility (`cn`)
 │   ├── navigation/
 │   │   ├── paths.ts               # Central route paths (`PATHS`) & sidebar items (`ADMIN_NAV_ITEMS`)
-│   │   ├── RouterContext.tsx      # History API router provider, hooks (`useNavigate`, `useLocation`), `<Link>`, `<NavLink>`
+│   │   ├── RouterContext.tsx      # History API router provider, `<Link>`, `<NavLink>`
+│   │   ├── router-context.ts      # Shared router context and hooks (`useNavigate`, `useLocation`)
 │   │   └── routes.tsx             # Declarative route table (`ROUTES`) & `<AppRouter />`
 │   ├── pages/
 │   │   ├── LandingPage.tsx        # Default public screen (`/`)
@@ -74,10 +75,10 @@ Routing is centrally managed inside `src/navigation/` so that `src/App.tsx` neve
   - `component`: The React page component to render (or `redirectTo` for route aliases such as `/admin` -> `/admin/blogs`).
 - **`AppRouter`**: Reads the current pathname, resolves the matching entry in `ROUTES`, and wraps the page in its assigned layout.
 
-### 3. Navigating Between Pages (`src/navigation/RouterContext.tsx`)
+### 3. Navigating Between Pages (`src/navigation/RouterContext.tsx` and `router-context.ts`)
 - **With shadcn `<Button />`**: Use the `useNavigate()` hook together with `PATHS`:
   ```tsx
-  import { useNavigate } from '@/navigation/RouterContext'
+  import { useNavigate } from '@/navigation/router-context'
   import { PATHS } from '@/navigation/paths'
   import { Button } from '@/components/ui/button'
 

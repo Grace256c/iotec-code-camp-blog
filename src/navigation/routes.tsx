@@ -6,7 +6,7 @@ import { BlogDetailsPage } from '../pages/BlogDetailsPage'
 import { AdminBlogsPage } from '../pages/admin/AdminBlogsPage'
 import { AdminTransactionsPage } from '../pages/admin/AdminTransactionsPage'
 import { AdminUsersPage } from '../pages/admin/AdminUsersPage'
-import { useLocation, useNavigate } from './RouterContext'
+import { useLocation, useNavigate } from './router-context'
 import { PATHS, type AppPath } from './paths'
 
 export type RouteLayout = 'public' | 'admin'
@@ -19,7 +19,7 @@ export interface RouteConfig {
   redirectTo?: AppPath
 }
 
-export const ROUTES: readonly RouteConfig[] = [
+const ROUTES: readonly RouteConfig[] = [
   {
     path: PATHS.LANDING,
     title: 'The Tech Report — Notes on Technology, Architecture & Culture',

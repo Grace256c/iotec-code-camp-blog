@@ -1,6 +1,7 @@
 import { LogOut, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Link, NavLink, useNavigate } from '../navigation/RouterContext'
+import { Link, NavLink } from '../navigation/RouterContext'
+import { useNavigate } from '../navigation/router-context'
 import { ADMIN_NAV_ITEMS, PATHS } from '../navigation/paths'
 
 export function AdminSidebar() {
