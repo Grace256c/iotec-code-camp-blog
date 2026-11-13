@@ -1,18 +1,10 @@
-import {PhoneIcon} from 'lucide-react'
-import heroImg from '@/assets/portrait.webp'
+import { Globe, MapPin } from 'lucide-react'
+import gracePortrait from '@/assets/grace-portrait.jpg'
 import {Button} from '@/components/ui/button'
 import {Card} from '@/components/ui/card'
-import {EnvelopeSimpleIcon, LinkedinLogoIcon, WhatsappLogoIcon, XLogoIcon} from "@phosphor-icons/react"
+import {EnvelopeSimpleIcon, GithubLogoIcon, LinkedinLogoIcon, WhatsappLogoIcon} from "@phosphor-icons/react"
 
-const AUTHOR_EMAIL = 'assubbi@techreport.journal'
-const AUTHOR_PHONE = '+256 712 345 678'
-const AUTHOR_WHATSAPP = '+256 798 765 432'
-const AUTHOR_LINKEDIN = 'annessubbi'
-const AUTHOR_X_HANDLE = '@ssubbianne'
-
-function sanitizePhoneNumber(phone: string, keepPlus = false): string {
-  return keepPlus ? phone.replace(/[^\d+]/g, '') : phone.replace(/\D/g, '')
-}
+const AUTHOR_EMAIL = 'gracenakiyemba256@gmail.com'
 
 function openExternalUrl(url: string) {
   window.open(url, '_blank', 'noopener,noreferrer')
@@ -23,23 +15,20 @@ export function HeroSection() {
     window.location.href = `mailto:${AUTHOR_EMAIL}`
   }
 
-  const handleOpenPhone = () => {
-    const formattedPhone = sanitizePhoneNumber(AUTHOR_PHONE, true)
-    window.location.href = `tel:${formattedPhone}`
+  const handleOpenGitHub = () => {
+    openExternalUrl('https://github.com/Grace256c')
   }
 
   const handleOpenWhatsApp = () => {
-    const whatsappDigits = sanitizePhoneNumber(AUTHOR_WHATSAPP, false)
-    openExternalUrl(`https://wa.me/${whatsappDigits}`)
+    openExternalUrl('https://wa.me/256756339110')
   }
 
   const handleOpenLinkedIn = () => {
-    openExternalUrl(`https://www.linkedin.com/in/${AUTHOR_LINKEDIN}`)
+    openExternalUrl('https://www.linkedin.com/in/grace-nakiyemba/')
   }
 
-  const handleOpenX = () => {
-    const cleanHandle = AUTHOR_X_HANDLE.replace(/^@/, '')
-    openExternalUrl(`https://x.com/${cleanHandle}`)
+  const handleOpenPortfolio = () => {
+    openExternalUrl('https://gracenakiyemba.netlify.app/')
   }
 
   return (
@@ -54,8 +43,8 @@ export function HeroSection() {
             />
 
             <img
-              src={heroImg}
-              alt="Anne Ssubbi, Systems Architect and Founder of The Tech Report"
+              src={gracePortrait}
+              alt="Portrait of Grace Nakiyemba"
               fetchPriority="high"
               width={680}
               height={716}
@@ -71,9 +60,9 @@ export function HeroSection() {
           </Card>
 
           <figcaption className="mt-3.5 space-y-0.5">
-            <p className="text-xs font-semibold text-foreground">Anne Ssubbi</p>
+            <p className="text-xs font-semibold text-foreground">Grace Nakiyemba</p>
             <p className="text-[11px] leading-relaxed text-muted-foreground">
-              Systems Architect &amp; Independent Essayist. Founder of The Tech Report
+              Software Engineer &amp; AI Builder
             </p>
           </figcaption>
         </figure>
@@ -81,37 +70,49 @@ export function HeroSection() {
         {/* Right Column: Authorial Focus & Direct Inquiries (Below image on mobile, right on desktop) */}
         <div className="flex flex-col lg:col-span-7 lg:pt-1">
           <div className="flex items-center gap-3">
-            <span className="text-[10px] font-semibold tracking-[0.16em] text-[#9a5b42] uppercase">
-              Authorial Focus
+            <span className="text-[10px] font-semibold tracking-[0.16em] text-primary uppercase">
+              ABOUT ME
             </span>
             <span aria-hidden="true" className="h-px w-10 bg-border" />
           </div>
 
           <h1 className="mt-3 font-serif text-3xl leading-[1.14] font-normal tracking-tight text-foreground sm:text-4xl lg:text-[42px]">
-            Writing at the intersection of{' '}
-            <em className="font-normal italic">quiet computing</em>, spatial
-            architecture, and enduring software.
+            Turning curiosity into innovation, and{' '}
+            <em className="font-normal italic text-primary">ideas into impact.</em>
           </h1>
 
           <p className="mt-5 text-[14.5px] leading-[1.7] text-foreground/80">
-            Over the last fifteen years, I have drafted distributed fault-tolerant
-            topologies by day and examined the subtle erosion of cognitive silence by
-            night. The Tech Report is an archival venue for unhurried
-            prose&mdash;deliberate investigations into digital ergonomics,
-            high-leverage simplicity, and technologies built to outlast market frenzy.
+            I am Grace Nakiyemba, a Software Engineer and AI Builder based in
+            Kampala, Uganda. My journey in technology is shaped by curiosity, a
+            commitment to continuous learning, and a belief that meaningful
+            innovation begins with understanding real human challenges.
           </p>
 
           <p className="mt-4 text-xs leading-[1.7] text-muted-foreground sm:text-[13px]">
-            Every piece published here undergoes iterative revisions, typographic
-            tuning, and empirical review. Supported solely through independent
-            patronage and direct subscriber micro-patronage. No algorithms, no ad
-            tracking, no performative urgency.
+            Currently pursuing Software and AI Engineering at Turing College, I
+            bring ideas to life through hands-on development, hackathons,
+            collaborative projects, and open-source contributions. My interests
+            span artificial intelligence, cloud computing, cybersecurity, and
+            blockchain.
+          </p>
+
+          <p className="mt-4 text-xs leading-[1.7] text-muted-foreground sm:text-[13px]">
+            I approach technology as more than a collection of tools. To me, it is
+            an opportunity to rethink possibilities, challenge conventional
+            approaches, and build solutions that make a lasting difference. This
+            space is where I share what I learn, what I build, and the perspectives
+            I develop along the way.
           </p>
 
           <div className="mt-7 pt-1">
             <h2 className="text-[10px] font-semibold tracking-[0.14em] text-muted-foreground uppercase">
-              Direct Inquiries &amp; Corroboration
+              Connect With Me
             </h2>
+
+            <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
+              <MapPin aria-hidden="true" className="size-3.5" />
+              Kampala, Uganda
+            </p>
 
             <div className="mt-3 flex flex-wrap gap-2">
               <Button
@@ -129,11 +130,11 @@ export function HeroSection() {
                 type="button"
                 variant="secondary"
                 size="sm"
-                onClick={handleOpenPhone}
+                onClick={handleOpenGitHub}
                 className="h-8 gap-2 rounded-md border border-border/80 bg-card px-3 text-xs font-normal text-foreground hover:bg-secondary"
               >
-                <PhoneIcon size={32} className="text-muted-foreground"/>
-                <span>{AUTHOR_PHONE}</span>
+                <GithubLogoIcon aria-hidden="true" size={32} className="text-muted-foreground"/>
+                <span>GitHub</span>
               </Button>
 
               <Button
@@ -144,7 +145,7 @@ export function HeroSection() {
                 className="h-8 gap-2 rounded-md border border-border/80 bg-card px-3 text-xs font-normal text-foreground hover:bg-secondary"
               >
                 <WhatsappLogoIcon size={32} className="text-muted-foreground"/>
-                <span>{AUTHOR_WHATSAPP}</span>
+                <span>WhatsApp</span>
               </Button>
 
               <Button
@@ -155,18 +156,18 @@ export function HeroSection() {
                 className="h-8 gap-2 rounded-md border border-border/80 bg-card px-3 text-xs font-normal text-foreground hover:bg-secondary"
               >
                 <LinkedinLogoIcon size={32} className="text-muted-foreground"/>
-                <span>{AUTHOR_LINKEDIN}</span>
+                <span>LinkedIn</span>
               </Button>
 
               <Button
                 type="button"
                 variant="secondary"
                 size="sm"
-                onClick={handleOpenX}
+                onClick={handleOpenPortfolio}
                 className="h-8 gap-2 rounded-md border border-border/80 bg-card px-3 text-xs font-normal text-foreground hover:bg-secondary"
               >
-                <XLogoIcon size={32} className="text-muted-foreground" />
-                <span>{AUTHOR_X_HANDLE}</span>
+                <Globe aria-hidden="true" size={32} className="text-muted-foreground" />
+                <span>Portfolio</span>
               </Button>
             </div>
           </div>
