@@ -15,14 +15,18 @@ function normalizePath(rawPath: string): string {
   return rawPath.endsWith('/') ? rawPath.slice(0, -1) : rawPath
 }
 
+function readLocation() {
+  return typeof window === 'undefined'
+    ? { pathname: PATHS.LANDING, search: '' }
+    : { pathname: normalizePath(window.location.pathname), search: window.location.search }
+}
+
 export function RouterProvider({ children }: { children: ReactNode }) {
-  const [pathname, setPathname] = useState<string>(() =>
-    typeof window !== 'undefined' ? normalizePath(window.location.pathname) : PATHS.LANDING,
-  )
+  const [location, setLocation] = useState(readLocation)
 
   useEffect(() => {
     const handlePopState = () => {
-      setPathname(normalizePath(window.location.pathname))
+      setLocation(readLocation())
     }
 
     window.addEventListener('popstate', handlePopState)
@@ -30,19 +34,22 @@ export function RouterProvider({ children }: { children: ReactNode }) {
   }, [])
 
   const navigate = useCallback((to: AppPath, options?: NavigateOptions) => {
-    const normalizedTarget = normalizePath(to)
-    if (window.location.pathname !== normalizedTarget) {
+    const pathname = normalizePath(to)
+    const query = new URLSearchParams(options?.search).toString()
+    const search = query ? `?${query}` : ''
+    const target = `${pathname}${search}`
+    if (`${window.location.pathname}${window.location.search}` !== target) {
       if (options?.replace) {
-        window.history.replaceState({}, '', normalizedTarget)
+        window.history.replaceState({}, '', target)
       } else {
-        window.history.pushState({}, '', normalizedTarget)
+        window.history.pushState({}, '', target)
       }
     }
-    setPathname(normalizedTarget)
+    setLocation({ pathname, search })
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
 
-  const value = useMemo(() => ({ pathname, navigate }), [pathname, navigate])
+  const value = useMemo(() => ({ ...location, navigate }), [location, navigate])
 
   return <RouterContext.Provider value={value}>{children}</RouterContext.Provider>
 }

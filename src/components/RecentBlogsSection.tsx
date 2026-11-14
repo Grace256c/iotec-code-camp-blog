@@ -31,7 +31,7 @@ function formatStepNumber(num: number): string {
 
 function BlogCard({ blog, onRead }: { blog: BlogPostPreview; onRead: () => void }) {
   return (
-    <Card className="group flex h-full flex-col gap-0 overflow-hidden rounded-xl border-border bg-white p-0 py-0 shadow-2xs transition-shadow hover:shadow-md">
+    <Card className="group relative flex h-full flex-col gap-0 overflow-hidden rounded-xl border-border bg-white p-0 py-0 shadow-2xs transition-shadow hover:shadow-md">
       <div className="aspect-16/10 w-full overflow-hidden bg-muted">
         <img
           src={blog.imageUrl}
@@ -81,7 +81,8 @@ function BlogCard({ blog, onRead }: { blog: BlogPostPreview; onRead: () => void 
             variant="link"
             size="xs"
             onClick={onRead}
-            className="h-auto gap-1.5 p-0 text-xs font-medium text-primary hover:no-underline"
+            aria-label={`Read ${blog.title}`}
+            className="h-auto gap-1.5 p-0 text-xs font-medium text-primary hover:no-underline after:absolute after:inset-0 after:cursor-pointer after:content-['']"
           >
             <span>Read</span>
             <ArrowRight
@@ -98,6 +99,10 @@ function BlogCard({ blog, onRead }: { blog: BlogPostPreview; onRead: () => void 
 export function RecentBlogsSection() {
   const navigate = useNavigate()
   const scrollContainerRef = useRef<HTMLDivElement | null>(null)
+
+  const handleReadBlog = (blogId: BlogPostPreview['id']) => {
+    navigate(PATHS.BLOG_DETAILS, { search: new URLSearchParams({ id: blogId }).toString() })
+  }
 
   const [selectedCategory, setSelectedCategory] = useState<FilterCategory>('All')
   const [isSeeAll, setIsSeeAll] = useState(false)
@@ -283,7 +288,7 @@ export function RecentBlogsSection() {
             <BlogCard
               key={blog.id}
               blog={blog}
-              onRead={() => navigate(PATHS.BLOG_DETAILS)}
+              onRead={() => handleReadBlog(blog.id)}
             />
           ))}
         </div>
@@ -301,7 +306,7 @@ export function RecentBlogsSection() {
             >
               <BlogCard
                 blog={blog}
-                onRead={() => navigate(PATHS.BLOG_DETAILS)}
+                onRead={() => handleReadBlog(blog.id)}
               />
             </div>
           ))}
