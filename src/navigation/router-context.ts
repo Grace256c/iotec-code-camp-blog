@@ -3,10 +3,12 @@ import type { AppPath } from './paths'
 
 export interface NavigateOptions {
   replace?: boolean
+  search?: string
 }
 
 interface RouterContextValue {
   pathname: string
+  search: string
   navigate: (to: AppPath, options?: NavigateOptions) => void
 }
 
@@ -17,7 +19,7 @@ export function useLocation() {
   if (!context) {
     throw new Error('useLocation must be used within a RouterProvider')
   }
-  return { pathname: context.pathname }
+  return { pathname: context.pathname, search: context.search }
 }
 
 export function useNavigate() {
